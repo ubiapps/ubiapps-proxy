@@ -42,11 +42,13 @@ var initialiseProxy = function() {
 
   var server = http.createServer(function(req,res) {
     var options = getOptions(req);
+    console.log("proxying " + req.headers.host);
     _proxy.web(req,res,options);
   });
 
   server.on("upgrade",function(req,socket,head) {
     var options = getOptions(req);
+    console.log("upgrading " + req.headers.host);
     _proxy.ws(req,socket,head,options);
   });
 
