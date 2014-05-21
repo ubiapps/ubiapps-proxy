@@ -38,6 +38,10 @@ var initialiseProxy = function() {
     }
   });
 
+  _proxy.on("error", function(err) {
+    console.error("proxy error",err);
+  });
+
   readConfig();
 
   var server = http.createServer(function(req,res) {
@@ -57,7 +61,7 @@ var initialiseProxy = function() {
   });
 
   server.on("error",function(err) {
-    console.error("proxying error",err);
+    console.error("server error",err);
   });
 
   server.listen(80);
