@@ -1,0 +1,5 @@
+{ 
+  "ealden.com": "http://localhost:8080",
+  "ubitoolbox.ealden.com": "http://localhost:8082",
+  "*": "http://localhost:8082"
+}
