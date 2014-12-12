@@ -2,6 +2,18 @@
   "pzp.ubiapps.com": "http://localhost:8080",
   "appstore.ubiapps.com": "http://localhost:8084",
   "ubitoolbox.ubiapps.com": "http://localhost:8082",
+  "tbx.ubiapps.com": "http://localhost:8082",
   "toolbox.ubiapps.com": "http://localhost:8082",
-  "*": "http://localhost:8080"
+  "ucontrol.ubiapps.com": "http://ucontrol.ealden.com",
+  "utrack.ubiapps.com": "http://localhost:3000",
+  "ocdp.nquiringminds.com": "http://localhost:8082",
+  "app1.ubiapps.com": "http://localhost:10000",
+  "app2.ubiapps.com": "http://localhost:10001",
+  "app3.ubiapps.com": "http://localhost:10002",
+  "couchdb.ubiapps.com": "http://localhost:5984",
+  "todo.ubiapps.com": "http://localhost:8000",
+  "ucontrolapi.ubiapps.com": "http://localhost:3333",
+  "ubitaxi.ubiapps.com": "http://localhost:8091",
+  "econnect.ubiapps.com": "http://localhost:11000",
+  "*": "https://ezh.ubiapps.com"
 }
