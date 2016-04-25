@@ -1,7 +1,16 @@
 {
-  "lc-tdxx.nqminds.com": "http://localhost:4443",
-  "lc-tbx.nqminds.com": "http://localhost:2222",
-  "lc-cmd.nqminds.com": "http://localhost:3103",
-  "lc-q.nqminds.com": "http://localhost:3104",
-  "*": "http://localhost:4443"
+  "port": 4443,
+  "useSSL": true,
+  "options": {
+    "key": "./nqminds.key",
+    "cert": "./nqminds.cert",
+    "ca": "./rapidSSL.cert"
+  },
+  "targets": {
+    "lc-tdxx.nqminds.com": "http://localhost:4443",
+    "lc-tbx.nqminds.com": "http://localhost:2222",
+    "lc-cmd.nqminds.com": "http://localhost:3103",
+    "lc-q.nqminds.com": "http://localhost:3104",
+    "*": "http://localhost:4443"
+  }
 }

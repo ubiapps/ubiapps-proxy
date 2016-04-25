@@ -1,17 +1,20 @@
 var http = require("http");
+var https = require("https");
 var httpProxy = require("http-proxy");
 var path = require("path");
 var fs = require("fs");
 
 var _configFile = "proxyConfig.json";
 var _configPath = path.join(__dirname,"proxyConfig.json");
+var _config = {};
 var _proxyTargets = {};
 var _proxy = httpProxy.createProxyServer({});
 
 var readConfig = function() {
   var cfg = fs.readFileSync(_configPath);
   try {
-    _proxyTargets = JSON.parse(cfg);
+    _config = JSON.parse(cfg);
+    _proxyTargets = _config.targets;
     console.log("successfully parsed config file");
   } catch (err) {
     console.log("failed to parse config file: " + err.message);
@@ -44,11 +47,26 @@ var initialiseProxy = function() {
 
   readConfig();
 
-  var server = http.createServer(function(req,res) {
+  var listener = function(req,res) {
     var options = getOptions(req);
     console.log("proxying " + req.headers.host);
     _proxy.web(req,res,options);
-  });
+  };
+
+  var server;
+  if (_config.useSSL) {
+    console.log("using ssl");
+    var sslOptions = {
+      key: fs.readFileSync(_config.options.key),
+      cert: fs.readFileSync(_config.options.cert),
+      ca: fs.readFileSync(_config.options.ca),
+      requestCert: true,
+      rejectUnauthorized: false
+    };
+    server = https.createServer(sslOptions, listener);    
+  } else {
+    server = http.createServer(listener);    
+  }
 
   server.on("upgrade",function(req,socket,head) {
     var options = getOptions(req);
@@ -57,14 +75,14 @@ var initialiseProxy = function() {
   });
 
   server.on("listening",function() {
-    console.log("listening on port 80");
+    console.log("listening on port " + _config.port);
   });
 
   server.on("error",function(err) {
     console.error("server error",err);
   });
 
-  server.listen(80);
+  server.listen(_config.port || 80);
 };
 
 initialiseProxy();
