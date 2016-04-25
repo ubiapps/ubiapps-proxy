@@ -50,8 +50,13 @@ var initialiseProxy = function() {
 
   var listener = function(req,res) {
     var options = getOptions(req);
-    console.log("proxying " + req.headers.host);
-    _proxy.web(req,res,options);
+    if (options.target) {
+      console.log("proxying " + req.headers.host);
+      _proxy.web(req,res,options);      
+    } else {
+      res.writeHead(400, { "Content-Type": "text/plain" });
+      res.end("unknown host");
+    }
   };
 
   var server;
