@@ -1,6 +1,11 @@
 {
-  "port": 8081,
-  "useSSL": false,
+  "port": 4443,
+  "useSSL": true,
+  "options": {
+    "key": "./nqminds.key",
+    "cert": "./nqminds.cert",
+    "ca": "./rapidSSL.cert"
+  },
   "targets": {
     "lc-tdxx.nqminds.com": "http://localhost:4443",
     "lc-tbx.nqminds.com": "http://localhost:2222",

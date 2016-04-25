@@ -1,11 +1,12 @@
+var argv = require("minimist")(process.argv.slice(2));
 var http = require("http");
 var https = require("https");
 var httpProxy = require("http-proxy");
 var path = require("path");
 var fs = require("fs");
 
-var _configFile = "proxyConfig.json";
-var _configPath = path.join(__dirname,"proxyConfig.json");
+var _configFile = argv.config || "proxyConfig.json";
+var _configPath = path.join(__dirname,_configFile);
 var _config = {};
 var _proxyTargets = {};
 var _proxy = httpProxy.createProxyServer({});

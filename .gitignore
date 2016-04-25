@@ -1,1 +1,4 @@
 /node_modules/
+/nqminds.cert
+/nqminds.key
+/rapidSSL.cert
