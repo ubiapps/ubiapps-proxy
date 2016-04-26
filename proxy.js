@@ -9,7 +9,7 @@ var _configFile = argv.config || "proxyConfig.json";
 var _configPath = path.join(__dirname,_configFile);
 var _config = {};
 var _proxyTargets = {};
-var _proxy = httpProxy.createProxyServer({});
+var _proxy = httpProxy.createProxyServer({xfwd:true});
 
 var readConfig = function() {
   var cfg = fs.readFileSync(_configPath);
