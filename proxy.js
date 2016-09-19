@@ -66,7 +66,7 @@ var initialiseProxy = function() {
       key: fs.readFileSync(_config.options.key),
       cert: fs.readFileSync(_config.options.cert),
       ca: fs.readFileSync(_config.options.ca),
-      requestCert: true,
+      requestCert: false,
       rejectUnauthorized: false
     };
     server = https.createServer(sslOptions, listener);    
