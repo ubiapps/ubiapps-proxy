@@ -65,10 +65,12 @@ var initialiseProxy = function() {
     var sslOptions = {
       key: fs.readFileSync(_config.options.key),
       cert: fs.readFileSync(_config.options.cert),
-      ca: fs.readFileSync(_config.options.ca),
-      requestCert: false,
-      rejectUnauthorized: false
+      requestCert: !!_config.options.requestCert,
+      rejectUnauthorized: !!_config.options.rejectUnauthorized
     };
+    if (_config.options.ca) {
+      sslOptions.ca = fs.readFileSync(_config.options.ca);
+    }
     server = https.createServer(sslOptions, listener);    
   } else {
     server = http.createServer(listener);    
