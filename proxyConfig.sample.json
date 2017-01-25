@@ -1,6 +1,7 @@
 {
   "port": 8081,
   "useSSL": false,
+  "timeout": 600000,
   "targets": {
     "lc-tdxx.nqminds.com": "http://localhost:4443",
     "lc-tbx.nqminds.com": "http://localhost:2222",

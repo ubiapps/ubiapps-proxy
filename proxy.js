@@ -76,6 +76,8 @@ var initialiseProxy = function() {
     server = http.createServer(listener);    
   }
 
+  server.timeout = _config.timeout || 0;
+
   server.on("upgrade",function(req,socket,head) {
     var options = getOptions(req);
     console.log("upgrading " + req.headers.host);
