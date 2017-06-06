@@ -4,6 +4,7 @@ var https = require("https");
 var httpProxy = require("http-proxy");
 var path = require("path");
 var fs = require("fs");
+var _ = require("lodash");
 
 var _configFile = argv.config || "proxyConfig.json";
 var _configPath = path.join(__dirname,_configFile);
@@ -52,7 +53,7 @@ var initialiseProxy = function() {
     var options = getOptions(req);
     if (options.target) {
       console.log("proxying " + req.headers.host);
-      _proxy.web(req,res,options);      
+      _proxy.web(req,res,options);
     } else {
       res.writeHead(400, { "Content-Type": "text/plain" });
       res.end("unknown host");
@@ -69,11 +70,14 @@ var initialiseProxy = function() {
       rejectUnauthorized: !!_config.options.rejectUnauthorized
     };
     if (_config.options.ca) {
-      sslOptions.ca = fs.readFileSync(_config.options.ca);
+      sslOptions.ca = [];
+      _.forEach(_config.options.ca, (ca) => {
+        sslOptions.ca.push(fs.readFileSync(ca));
+      });
     }
-    server = https.createServer(sslOptions, listener);    
+    server = https.createServer(sslOptions, listener);
   } else {
-    server = http.createServer(listener);    
+    server = http.createServer(listener);
   }
 
   server.timeout = _config.timeout || 0;

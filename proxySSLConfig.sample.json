@@ -4,7 +4,9 @@
   "options": {
     "key": "./nqminds.key",
     "cert": "./nqminds.cert",
-    "ca": "./rapidSSL.cert"
+    "ca": [
+      "./rapidSSL.cert"
+    ]
   },
   "targets": {
     "lc-tdxx.nqminds.com": "http://localhost:4443",
